@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Message</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4682B4; 
+            --bg: #adc2d3;
+            --white: #dfe7ee;
+            --text: #252729;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* --- INTRO --- */
+        #intro-screen { text-align: center; transition: 0.5s; padding: 20px; }
+        .envelope-icon { font-size: 80px; animation: float 3s ease-in-out infinite; display: block; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        #yes-btn { background: var(--primary); color: white; }
+        #no-btn { background: #95a5a6; color: white; }
+
+        /* --- MAIN CONTENT --- */
+        #main-content { 
+            display: none; 
+            width: 90%; 
+            max-width: 550px; 
+            animation: fadeIn 0.8s; 
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        .letter-box {  
+            background: var(--white); 
+            padding: 30px; 
+            border-radius: 25px; 
+            box-shadow: 0 15px 35px rgba(70, 130, 180, 0.2); 
+            max-height: 80vh; 
+            overflow-y: auto; 
+        }
+
+        .letter-content { 
+            font-family: 'Dancing Script', cursive; 
+            font-size: 1.4em; 
+            text-align: left; 
+            white-space: pre-line; 
+            color: #34495e; 
+            line-height: 1.6;
+        }
+
+        /* Custom Scrollbar para sa mahabang letter */
+        .letter-box::-webkit-scrollbar { width: 8px; }
+        .letter-box::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <div id="intro-screen">
+        <span class="envelope-icon">💌</span>
+        <h2 style="color: var(--text);">Please, open this baby</h2>
+        <div style="margin-top: 25px; display: flex; gap: 15px; justify-content: center; align-items: center;">
+            <button id="yes-btn">Open</button>
+            <button id="no-btn">No</button>
+        </div>
+        <div id="emoji-container" style="margin-top: 20px;"></div>
+    </div>
+
+    <div id="main-content">
+        <div class="letter-box">
+            <div class="letter-content">
+                Helloooo^^ My Baby didin,
+
+                I’m sorry if this is all I can give for now. I don’t have money yet, so this is what I made instead. But even if it’s simple, it comes from my heart.
+
+                Every day that we’re together, I always wish the time would last longer. I don’t want you to go home because I know I’ll miss you again, and sometimes we even fight because we miss each other too much.
+
+                Thank you, love, for always giving me the courage to keep going in life. You support me in everything—though not too much in the bad things, because you don’t like that—but still, you never leave me behind.
+
+                Thank you for always making me smile. Your aura is contagious, and you shine so brightly. I don’t like the sun because it’s too hot, it irritates me, and it makes me sweat heavily. But you, my love, you’re like the sun in a different way. Instead of heat that burns and exhausts me, you give me the warmth of your smile, your eyes, and your beauty. Not the burning pain, but the burning love that I’m always searching for.
+
+                I’m like a sunflower, but instead of facing the real sun, I turn to you. From you, I receive care and warmth that doesn’t burn. And when the rain falls, and the cold surrounds me, I long for the warmth of your hug—like a blanket that shields me from the chill.
+
+                I love you so much, my budinday. I will love you every single day, and I will choose you every single day. I love you so so so so much.
+
+                m
+                (corny ng letter ko no haha)
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let noScale = 1;
+        let yesScale = 1;
+        const emojis = ["🙁", "🥺", "😢", "😭"];
+
+        // "No" button behavior
+        document.getElementById('no-btn').addEventListener('click', () => {
+            noScale -= 0.15;
+            yesScale += 0.3;
+            document.getElementById('no-btn').style.transform = `scale(${noScale})`;
+            document.getElementById('yes-btn').style.transform = `scale(${yesScale})`;
+            
+            const em = document.createElement('span');
+            em.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            document.getElementById('emoji-container').appendChild(em);
+            
+            if(noScale <= 0.3) document.getElementById('no-btn').style.display = 'none';
+        });
+
+        // "Open" button behavior
+        document.getElementById('yes-btn').addEventListener('click', () => {
+            document.getElementById('intro-screen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('intro-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            }, 500);
+        });
+    </script>
+</body>
+</html>
